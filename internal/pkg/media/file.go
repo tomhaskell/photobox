@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 )
 
 // FileRecord holds information about a media file
@@ -24,7 +25,7 @@ func NewFileRecordFromPath(path string) *FileRecord {
 		FileName: fileName,
 		BaseName: name,
 		Location: filepath.Dir(path),
-		FileExt:  ext,
+		FileExt:  strings.ToLower(ext[1:]),
 	}
 }
 
@@ -37,4 +38,8 @@ func NewFileRecordWithModeCheck(path string, info os.FileInfo) (*FileRecord, err
 	} else {
 		return nil, fmt.Errorf("Not a regular file")
 	}
+}
+
+func (f *FileRecord) String() string {
+	return fmt.Sprintf("%v > %v [%v]", f.Location, f.BaseName, f.FileExt)
 }

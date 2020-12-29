@@ -24,8 +24,8 @@ func main() {
 		fmt.Println(err)
 	}
 
-	for _, imgFile := range fileList {
-		fmt.Println(imgFile.FileName)
+	for _, mediaFile := range fileList {
+		fmt.Println(mediaFile)
 	}
 	fmt.Println(strconv.Itoa(len(fileList)) + " files found")
 
