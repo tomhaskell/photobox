@@ -30,11 +30,9 @@ func Scan(ctx context.Context, path string, concurrency int) ([]*media.FileRecor
 	go startStream(ctx, fileStream, path)
 
 	// process files
-	go func() {
-		for f := range fileStream {
-			files = append(files, f)
-		}
-	}()
+	for f := range fileStream {
+		files = append(files, f)
+	}
 
 	wg.Wait()
 
@@ -64,13 +62,13 @@ func startStream(ctx context.Context, fileStream chan *media.FileRecord, path st
 
 func processFileWorker(ctx context.Context, wg *sync.WaitGroup, fileStream chan *media.FileRecord) {
 	defer wg.Done()
-	for f := range fileStream {
+	/* for f := range fileStream {
 		fmt.Printf("Processing [%v]\n", f.FileName)
-		//select {
-		//case fileStream <- media.NewFileRecordWithModeCheck(path):
-		//case <-ctx.Done():
-		// return
-	}
+		select {
+		case fileStream <- media.NewFileRecordWithModeCheck(path):
+		case <-ctx.Done():
+		 return
+	} */
 
 	// }
 	fmt.Println("ended")
