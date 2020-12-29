@@ -35,9 +35,8 @@ func NewFileRecordFromPath(path string) *FileRecord {
 func NewFileRecordWithModeCheck(path string, info os.FileInfo) (*FileRecord, error) {
 	if info.Mode().IsRegular() {
 		return NewFileRecordFromPath(path), nil
-	} else {
-		return nil, fmt.Errorf("Not a regular file")
 	}
+	return nil, fmt.Errorf("Not a regular file")
 }
 
 func (f *FileRecord) String() string {
