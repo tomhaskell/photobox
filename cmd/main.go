@@ -19,7 +19,7 @@ func main() {
 
 	ctx := context.Background()
 
-	fileList, err := fs.Scan(*photoPath, *threads, ctx)
+	fileList, err := fs.Scan(ctx, *photoPath, *threads)
 	if err != nil {
 		fmt.Println(err)
 	}
